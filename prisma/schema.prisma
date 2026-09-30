@@ -1,0 +1,111 @@
+// Prisma schema for EVE TOUR
+// SQLite for zero-config local dev. Can be switched to Postgres by changing
+// the datasource provider + url.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Every translatable field is a JSON string: {"en": "...", "ru": "..."}
+model Tour {
+  id             String      @id @default(cuid())
+  slug           String      @unique
+  title          String // JSON {en,ru}
+  subtitle       String      @default("{}") // JSON
+  excerpt        String      @default("{}") // JSON
+  description    String      @default("{}") // JSON
+  highlights     String      @default("[]") // JSON array of strings {en,ru}
+  includes       String      @default("[]") // JSON array
+  excludes       String      @default("[]") // JSON array
+  itinerary      String      @default("[]") // JSON [{day,title,desc,image}]
+  category       String // sheki | guba | baku | absheron | cars | adventure | packages
+  region         String
+  duration       String // "1 day", "2 days / 1 night"
+  priceFrom      Int? // in EUR, null = "on request"
+  priceMode      String      @default("from") // from | request
+  durationDays   Int?
+  coverImage     String
+  images         String      @default("[]") // JSON array of paths
+  isFeatured     Boolean     @default(false)
+  isPublished    Boolean     @default(true)
+  sortOrder      Int         @default(0)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@index([category, isPublished])
+}
+
+model Place {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String // JSON
+  summary     String   @default("{}") // JSON
+  description String   @default("{}") // JSON
+  image       String
+  images      String   @default("[]") // JSON array
+  highlights  String   @default("[]") // JSON array
+  coordinates String? // "lat,lng"
+  distanceKm  Int? // distance from Baku
+  bestSeason  String   @default("{}") // JSON
+  isPublished Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  author    String
+  country   String? // "Germany", "Russia" ...
+  rating    Int      @default(5)
+  text      String   @default("{}") // JSON {en,ru}
+  avatar    String?
+  tourTitle String   @default("{}") // JSON
+  image     String? // optional review photo
+  isApproved Boolean @default(false)
+  isPublished Boolean @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model HeroSlide {
+  id         String   @id @default(cuid())
+  title      String   @default("{}") // JSON
+  subtitle   String   @default("{}") // JSON
+  image      String
+  ctaLabel   String   @default("{}") // JSON
+  ctaHref    String   @default("/tours")
+  align      String   @default("center") // center | left
+  isPublished Boolean @default(true)
+  sortOrder  Int      @default(0)
+  createdAt  DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  contact   String
+  tour      String?
+  text      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+}
+
+model Setting {
+  key       String @id
+  value     String // JSON
+  updatedAt DateTime @updatedAt
+}
