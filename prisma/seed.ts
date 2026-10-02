@@ -43,7 +43,7 @@ const SLIDES = [
     image: '/media/baku-flame-towers-night.jpg',
     title: t('Baku', 'Баку'),
     subtitle: t(
-      'The Flame Towers, the old walled city and the Caspian waterfront â€” start where the country starts.',
+      'The Flame Towers, the old walled city and the Caspian waterfront — start where the country starts.',
       'Пламенные башни, старый город и набережная Каспия — начало начинается здесь.',
     ),
     ctaLabel: t('Explore Baku', 'Смотреть Баку'),
@@ -54,7 +54,7 @@ const SLIDES = [
     image: '/media/sheki-old-town.jpg',
     title: t('Shaki', 'Шеки'),
     subtitle: t(
-      'Silk-road caravanserais, hand-painted ceilings and Khanâ€™s Palace under the Greater Caucasus.',
+      'Silk-road caravanserais, hand-painted ceilings and Khan’s Palace under the Greater Caucasus.',
       'Караван-сараи Шеки, расписные потолки и дворец хана под Кавказом.',
     ),
     ctaLabel: t('Explore Shaki', 'Смотреть Шеки'),
@@ -108,7 +108,7 @@ const TOURS_BASE = [
     title: t('Baku in a day', 'Баку за один день'),
     subtitle: t('The essential first-timer route', 'Маршрут для первого знакомства'),
     excerpt: t(
-      'Old City, Shirvanshahs Palace, Highland Park and the Flame Towers â€” the Baku everyone should see at least once.',
+      'Old City, Shirvanshahs Palace, Highland Park and the Flame Towers — the Baku everyone should see at least once.',
       'Старый город, дворец Ширваншахов, Парк высоких пейзажей и Пламенные башни — Баку, который нужно увидеть.',
     ),
     description: t(
@@ -172,7 +172,7 @@ const TOURS_BASE = [
     title: t('Shaki: the silk road city', 'Шеки: город Шёлкового пути'),
     subtitle: t('Shaki highlights in one day', 'Главное за один день'),
     excerpt: t(
-      "Khanâ€™s Palace, the Upper and Lower Caravanserais and the old bazaar â€” the town UNESCO put on its list.",
+      "Khan’s Palace, the Upper and Lower Caravanserais and the old bazaar — the town UNESCO put on its list.",
       'Дворец хана, Верхний и Нижний караван-сараи и старый базар — город из списка ЮНЕСКО.',
     ),
     description: t(
@@ -238,7 +238,7 @@ const TOURS_BASE = [
       'Археологический объект тысячелетней давности с действующими грязевыми вулканами и берег Каспия.',
     ),
     description: t(
-      'Gobustan means "land of ravines" â€” a protected site of rock carvings going back a millennium, where petroglyphs of hunters, boats and dancing figures are still visible on the limestone. Right next to it, more than twenty mud volcanoes are still active: cold, grey, smelling of sulfur. We finish the day on the Absheron coast with the sea and a late lunch.',
+      'Gobustan means "land of ravines" — a protected site of rock carvings going back a millennium, where petroglyphs of hunters, boats and dancing figures are still visible on the limestone. Right next to it, more than twenty mud volcanoes are still active: cold, grey, smelling of sulfur. We finish the day on the Absheron coast with the sea and a late lunch.',
       'Гобустан значит «страна ущелий» — охраняемый объект с наскальными рисунками тысячелетней давности: охотники, лодки и танцующие фигуры на известняке. Рядом работают более двадцати грязевых вулканов: холодная серая грязь с запахом серы. Заканчиваем день на побережье Абшерона, у моря.',
     ),
     highlights: list([
@@ -290,7 +290,7 @@ const TOURS_BASE = [
       'Утром яблочный край, днём вершины Большого Кавказа. Куба за один день.',
     ),
     description: t(
-      'North of Baku the road climbs from the Caspian plain into Quba, the countryâ€™s apple capital, and on to Shahdag where the peaks still hold snow well into spring. We stop in the orchards, try local apple juice and cheese, and if the season and the cable car agree, ride up into the mountains.',
+      'North of Baku the road climbs from the Caspian plain into Quba, the country’s apple capital, and on to Shahdag where the peaks still hold snow well into spring. We stop in the orchards, try local apple juice and cheese, and if the season and the cable car agree, ride up into the mountains.',
       'Севернее Баку дорога поднимается с каспийской равнины в Кубу — столицу яблок — и дальше к Шахдагу, где на вершинах снег лежит до весны. Останавливаемся в садах, пробуем яблочный сок и сыр, и если сезон и погода позволяют, поднимаемся в горы.',
     ),
     highlights: list([
@@ -338,7 +338,7 @@ const TOURS_BASE = [
     title: t('Paragliding over the Caspian', 'Параплантинг над Каспием'),
     subtitle: t('Fly above the coast', 'Полёт над побережьем'),
     excerpt: t(
-      'Tandem flight from the hills above the coast â€” no experience needed, just nerves and a good view.',
+      'Tandem flight from the hills above the coast — no experience needed, just nerves and a good view.',
       'Тандемный полёт с холмов над побережьем — опыт не нужен, только смелость и вид.',
     ),
     description: t(
@@ -375,7 +375,7 @@ const TOURS_BASE = [
     title: t('Azerbaijan in five days', 'Азербайджан за пять дней'),
     subtitle: t('The full private route', 'Полный частный маршрут'),
     excerpt: t(
-      'Baku, Gobustan, Shaki and Quba in one trip â€” the route most guests ask for, built around you.',
+      'Baku, Gobustan, Shaki and Quba in one trip — the route most guests ask for, built around you.',
       'Баку, Гобустан, Шеки и Куба за одну поездку — маршрут, который просят чаще всего.',
     ),
     description: t(
@@ -454,11 +454,11 @@ const TOURS_BASE = [
     title: t('Car with driver, by the day', 'Машина с водителем на день'),
     subtitle: t('No tour, just the car', 'Без тура, просто машина'),
     excerpt: t(
-      'A comfortable car and an experienced driver for the day â€” you decide where to go.',
+      'A comfortable car and an experienced driver for the day — you decide where to go.',
       'Комфортный автомобиль и опытный водитель на день — вы решаете, куда ехать.',
     ),
     description: t(
-      'Sometimes you do not need a guide, just a car and someone who knows the roads. We hire out a vehicle with driver by the day, airport to hotel, or for a weekend of wherever you want to be. Clean cars, English-speaking drivers, and no prepayment â€” you pay when the day is done.',
+      'Sometimes you do not need a guide, just a car and someone who knows the roads. We hire out a vehicle with driver by the day, airport to hotel, or for a weekend of wherever you want to be. Clean cars, English-speaking drivers, and no prepayment — you pay when the day is done.',
       'Иногда не нужен гид, нужна просто машина и человек, который знает дороги. Сдаём автомобиль с водителем на день, из аэропорта в отель или на выходные — куда захотите. Чистые машины, водители со знанием английского, и никакой предоплаты — платите в конце дня.',
     ),
     highlights: list([
@@ -492,7 +492,7 @@ const TOURS_BASE = [
     title: t('Summer & winter packages', 'Летние и зимние пакеты'),
     subtitle: t('Seasonal routes', 'Сезонные маршруты'),
     excerpt: t(
-      'Caspian beaches in summer, snow in Shahdag in winter â€” the same country, two completely different trips.',
+      'Caspian beaches in summer, snow in Shahdag in winter — the same country, two completely different trips.',
       'Пляжи Каспия летом и снег в Шахдаге зимой — одна страна, два совершенно разных путешествия.',
     ),
     description: t(
@@ -533,7 +533,7 @@ const PLACES = [
     title: t('Flame Towers', 'Пламенные башни'),
     summary: t('The symbol of modern Baku', 'Символ современного Баку'),
     description: t(
-      'Three glass towers crowned with fire-shaped roofs, built on a hill in the early 2000s. They glow at night and are visible from almost anywhere in the city â€” the easiest landmark to orient yourself by.',
+      'Three glass towers crowned with fire-shaped roofs, built on a hill in the early 2000s. They glow at night and are visible from almost anywhere in the city — the easiest landmark to orient yourself by.',
       'Три стеклянные башни с огненными крышами, построенные на холме в начале 2000-х. Ночью они светятся и видны почти отовсюду — самый простой ориентир в городе.',
     ),
     image: '/media/baku-flame-towers-night.jpg',
@@ -595,7 +595,7 @@ const PLACES = [
     title: t('Gobustan rock carvings', 'Наскальные рисунки Гобустана'),
     summary: t('Petroglyphs from a thousand years back', 'Петроглифы тысячелетней давности'),
     description: t(
-      'More than a thousand engravings on limestone cliffs: hunting scenes, boats, human figures and dancing women. Right beside them, mud volcanoes that are still erupting cold, grey mud â€” one of the strangest landscapes you will ever stand in.',
+      'More than a thousand engravings on limestone cliffs: hunting scenes, boats, human figures and dancing women. Right beside them, mud volcanoes that are still erupting cold, grey mud — one of the strangest landscapes you will ever stand in.',
       'Более тысячи изображений на известняковых скалах: охота, лодки, фигуры людей и танцующие женщины. Рядом — грязевые вулканы, которые до сих пор выбрасывают холодную серую грязь.',
     ),
     image: '/media/gobustan-mud-volcanoes.jpg',
@@ -637,7 +637,7 @@ const PLACES = [
     title: t('Quba & Shahdag', 'Куба и Шахдаг'),
     summary: t('Apple orchards and snow mountains', 'Яблочные сады и снежные горы'),
     description: t(
-      'Quba is the apple capital of Azerbaijan, and beyond it the road climbs to Shahdag, where the cable car lifts you to viewpoints over the Greater Caucasus. The village of Qusar and the road to Khinalug â€” Europeâ€™s highest village â€” are on the way if you have time.',
+      'Quba is the apple capital of Azerbaijan, and beyond it the road climbs to Shahdag, where the cable car lifts you to viewpoints over the Greater Caucasus. The village of Qusar and the road to Khinalug — Europe’s highest village — are on the way if you have time.',
       'Куба — яблочная столица Азербайджана, а дальше дорога поднимается к Шахдагу, откуда канатная дорога ведёт к смотровым площадкам Большого Кавказа. Деревня Кусар и дорога к Хиналугу — самой высокогорной деревне Европы — по пути, если есть время.',
     ),
     image: '/media/quba-mountains.jpg',
@@ -678,9 +678,9 @@ const PLACES = [
 /* Main                                                                */
 /* ------------------------------------------------------------------ */
 async function main() {
-  console.log('Seeding EVE TOURâ€¦')
+  console.log('Seeding EVE TOUR…')
 
-  // Admin user â€” change the password before deploying anywhere public.
+  // Admin user — change the password before deploying anywhere public.
   // Admin user. There is deliberately no default: falling back to a known
   // password is how "admin@evetour.az / eve-tour-2026" ended up in a
   // production-shaped database in the first place. Refuse to guess.
@@ -728,7 +728,7 @@ async function main() {
   // Reviews are intentionally NOT seeded. Real reviews go in from the admin
   // panel, copied verbatim from the Instagram review posts.
   const reviewCount = await prisma.review.count()
-  console.log(`  reviews: ${reviewCount} (none seeded â€” add your real ones in admin)`)
+  console.log(`  reviews: ${reviewCount} (none seeded — add your real ones in admin)`)
 
   // Brand settings
   await prisma.setting.upsert({
