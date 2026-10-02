@@ -1,14 +1,23 @@
-// Prisma schema for EVE TOUR
-// SQLite for zero-config local dev. Can be switched to Postgres by changing
-// the datasource provider + url.
+// Prisma 7 schema for EVE TOUR
+//
+// The provider below is only the *default* used by `prisma db push` in local
+// development. Nothing in the schema is SQLite-specific — every column is
+// String, Int?, Boolean or DateTime, all of which behave the same on Postgres —
+// so switching databases is a two-step change, not a rewrite:
+//
+//   1. Set DATABASE_URL to a postgres:// URL
+//   2. Change `provider` to "postgresql" and run `npx prisma db push`
+//
+// src/lib/db-adapter.ts picks the matching driver at runtime, so no application
+// code has to change. See docs/DEPLOY.md.
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
 }
 
 /// Every translatable field is a JSON string: {"en": "...", "ru": "..."}

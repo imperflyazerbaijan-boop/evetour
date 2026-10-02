@@ -33,9 +33,31 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Admin-uploaded images (served by /media/uploads/[name])
+/uploads/*
+!/uploads/.gitkeep
+
+# Local SQLite database
+/dev.db
+
+# Source material — reference images, not site content
+/source-assets/
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local database backups
+*.bak
+
+# Prisma generated client (recreated by `prisma generate`)
+/src/generated/
+
+# Local tooling binaries (e.g. cloudflared for tunnel testing)
+/.tools/
+
+# Local dev logs
+dev.log

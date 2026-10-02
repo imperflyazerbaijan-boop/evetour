@@ -1,26 +1,250 @@
 @import "tailwindcss";
 
+/* ============================================================
+   EVE TOUR — Design System
+   ------------------------------------------------------------
+   Palette is taken directly from the brand logo (public/brand):
+
+     mark blue     #4D8BA4   logo circle
+     signal orange #FE914C   suitcase + aircraft
+     ink           #0B1420   near-black, lets the logo sit on it
+
+   The editorial approach from the design pass is kept: a dark,
+   near-monochrome base where photography and type do the work,
+   with the logo's two colours used deliberately rather than
+   decoratively.
+   ============================================================ */
+
+@theme {
+  --color-ink-950: #070d14;
+  --color-ink-900: #0b1420;
+  --color-ink-850: #0f1a28;
+  --color-ink-800: #14202f;
+  --color-ink-700: #1e2c3d;
+  --color-ink-600: #2d3f53;
+  --color-ink-500: #4a5f76;
+  --color-ink-400: #7d90a4;
+  --color-ink-300: #a8b8c8;
+  --color-ink-200: #cfd9e3;
+  --color-ink-100: #eaf0f5;
+
+  /* Brand — from the logo */
+  --color-flame-700: #c85a1c;
+  --color-flame-600: #e56a25;
+  --color-flame-500: #fe914c;
+  --color-flame-400: #ffab74;
+  --color-flame-300: #ffc4a1;
+
+  --color-brand-700: #355f74;
+  --color-brand-600: #3f7793;
+  --color-brand-500: #4d8ba4;
+  --color-brand-400: #6ba5bb;
+  --color-brand-300: #9cc4d3;
+
+  /* Deep wash for large gradient fields */
+  --color-caspian-700: #16394c;
+  --color-caspian-600: #1d4c66;
+
+  --color-sand-100: #f4f1ec;
+
+  /* Oswald carries both latin and cyrillic, so headlines keep one shape
+     across locales. Bebas Neue was latin-only and made RU fall back. */
+  --font-display: var(--font-display-face), "Arial Narrow", "Helvetica Neue", sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", monospace;
+
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.75rem;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-float-slow: floatSlow 9s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+
+@keyframes scrollHint {
+  0%, 100% { transform: translateY(0); opacity: 0.35; }
+  50%      { transform: translateY(10px); opacity: 1; }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Kept in sync with the logo — override these three to retheme. */
+  --brand-primary: #fe914c;
+  --brand-accent: #4d8ba4;
+  --brand-deep: #0b1420;
+  --nav-h: 76px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink-950);
+  color: var(--color-ink-100);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--brand-primary);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ink-900); }
+::-webkit-scrollbar-thumb { background: var(--color-ink-600); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-primary); }
+
+/*
+ * Cyrillic adjustments.
+ *
+ * The display line-heights above (0.8–1.0) and the negative tracking are
+ * tuned for a tall Latin face with no descenders. Cyrillic has taller
+ * ascenders and descenders (д, ц, щ, у, ф), so the same values clip glyphs
+ * and squeeze Russian words together. Both locales now use the same font,
+ * so these are spacing corrections only — no font swap.
+ */
+:lang(ru) {
+  letter-spacing: normal;
+}
+
+@utility display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 13vw, 12rem);
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+@utility display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7.2vw, 6rem);
+  line-height: 0.86;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+@utility display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.8vw, 3.1rem);
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+@utility display-sm {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Cyrillic needs a taller box: these letters dip below the baseline. */
+:lang(ru) .display-xl {
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+:lang(ru) .display-lg {
+  line-height: 1.04;
+  letter-spacing: -0.005em;
+}
+:lang(ru) .display-md {
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+:lang(ru) .display-sm {
+  line-height: 1.18;
+}
+
+/* Oswald's x-height differs from Bebas; nudge Russian body copy slightly
+   so the two locales read at the same optical size. */
+:lang(ru) .eyebrow {
+  letter-spacing: 0.16em;
+}
+
+@utility eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--color-ink-900) 70%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+}
+
+/** Underline that wipes in from the left on hover — used on text links. */
+@utility link-wipe {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/** Hairline rule that grows from the left when scrolled into view. */
+@utility rule-x {
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  scale: 0 1;
+}
+
+@utility glow-primary {
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--brand-primary) 45%, transparent),
+    0 18px 60px -12px color-mix(in oklab, var(--brand-primary) 60%, transparent);
+}
+
+@utility text-gradient-brand {
+  background: linear-gradient(100deg, var(--brand-accent) 0%, #fff 38%, var(--brand-primary) 72%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Visible, consistent keyboard focus across the whole site. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-flame-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
