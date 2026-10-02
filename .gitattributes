@@ -1,0 +1,9 @@
+# LF on checkout: shell scripts and systemd/Caddy configs must not carry CRLF,
+# or bash reads the CR as part of the command.
+
+*.sh text eol=lf
+deploy/*.service text eol=lf
+deploy/Caddyfile text eol=lf
+
+# Everything else keeps the platform default.
+* text=auto

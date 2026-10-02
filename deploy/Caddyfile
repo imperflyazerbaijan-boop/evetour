@@ -1,0 +1,39 @@
+# EVE TOUR — Caddy reverse proxy
+#
+# Caddy obtains and renews a TLS certificate automatically, so this is the only
+# file needed for HTTPS. Replace evetour.az below with your domain, then:
+#
+#   sudo cp deploy/Caddyfile /etc/caddy/Caddyfile
+#   sudo systemctl reload caddy
+#
+# The A record for the domain must already point at the server's public IP
+# before the first start, or the certificate request will fail.
+
+{
+	email admin@evetour.az
+}
+
+evetour.az, www.evetour.az {
+	encode zstd gzip
+
+	# next/image optimisation is CPU-bound; do not let a single image request
+	# hold the app hostage.
+	reverse_proxy 127.0.0.1:3000 {
+		flush_interval -1
+	}
+
+	header {
+		# next.config.ts allows images from these three hosts only, so the CSP
+		# can match exactly rather than using a wildcard.
+		Content-Security-Policy "default-src 'self'; img-src 'self' data: blob: https://upload.wikimedia.org https://images.unsplash.com https://images.pexels.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'"
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "DENY"
+		-Server
+	}
+
+	log {
+		output file /var/log/caddy/evetour.log
+	}
+}

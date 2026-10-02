@@ -1,0 +1,49 @@
+# EVE TOUR — systemd unit
+#
+# Install:
+#   sudo cp deploy/evetour.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now evetour
+#
+# The app runs as a dedicated unprivileged user rather than root, and the
+# working directory is the git checkout so `uploads/` and `dev.db` stay on the
+# persistent boot volume. Both are the reason this app needs a real server:
+# on a serverless host they would be wiped between instances.
+
+[Unit]
+Description=EVE TOUR (Next.js)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=evetour
+Group=evetour
+WorkingDirectory=/srv/evetour
+
+Environment=NODE_ENV=production
+# Secrets live in this file, not in the unit — see .env.example.
+# systemd reads it before starting; keep it chmod 600 and owned by evetour.
+EnvironmentFile=/srv/evetour/.env
+
+# `npm start` is `next start`, which serves the .next/ build output. Nothing
+# else should hold port 3000.
+ExecStart=/usr/bin/npm start
+
+Restart=always
+RestartSec=5
+
+# Next.js writes nothing outside the checkout, so the whole filesystem can be
+# read-only to the process. The one exception is that Node needs /tmp.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/evetour
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=evetour
+
+[Install]
+WantedBy=multi-user.target

@@ -1,5 +1,27 @@
 # Deploying EVE TOUR
 
+## Why not GitHub Pages
+
+GitHub Pages serves static files only — there is no Node.js runtime. This app
+cannot run there:
+
+| Feature in this repo | GitHub Pages |
+| --- | --- |
+| `src/proxy.ts` (next-intl locale routing) | needs a server |
+| `src/app/admin/actions.ts`, `content-actions.ts` (`'use server'`) | Server Actions need a server |
+| `src/app/api/messages/route.ts` (POST → Prisma) | route handlers need a server |
+| `src/app/api/admin/media/route.ts` (writes files) | needs a writable filesystem |
+| `src/lib/admin-auth.ts` (`cookies()`) | needs a server |
+| `uploads/` (admin media) | no persistent disk |
+
+Next.js can emit a static export (`output: 'export'`), but the docs list Proxy,
+Server Actions, Route Handlers and Cookies as unsupported — which is the whole
+admin panel plus the contact form. A static export would also freeze the content
+at build time, so every edit in the admin would need a rebuild and a push.
+
+The repository stays on GitHub as the source of truth. The *running* site needs
+a host with a Node.js runtime.
+
 ## Before you start
 
 ```bash
@@ -22,6 +44,39 @@ This is the one decision everything else hangs on.
 
 `check:deploy` detects the serverless case and fails rather than letting you
 discover it after a customer writes a contact form that goes nowhere.
+
+### Free hosting that works: Oracle Cloud Always Free
+
+A free ARM VM (2 OCPU, 12 GB, 200 GB block volume) is a real server: one
+long-running process on one persistent disk. That is exactly what this app
+wants, so **SQLite and `uploads/` both keep working and no application code
+changes**.
+
+Vercel's free plan is explicitly *non-commercial, personal use only* — not
+suitable for a business that sells tours. Render's free tier has the same
+restriction. Cloudflare Pages is commercial-friendly but has the serverless
+filesystem problem above.
+
+Full walkthrough in [`deploy/README.md`](../deploy/README.md). The short version:
+
+```bash
+# On a fresh Ubuntu 24.04 instance, as root:
+bash deploy/setup-server.sh          # Node 22, Caddy, evetour user, firewall
+
+# Then as the app user:
+git clone https://github.com/imperflyazerbaijan-boop/evetour.git /srv/evetour
+cp .env.example .env                 # edit: AUTH_SECRET, ADMIN_PASSWORD, site URL
+npm ci && npm run setup              # generate client, create tables, seed
+sudo cp deploy/evetour.service /etc/systemd/system/
+sudo cp deploy/Caddyfile /etc/caddy/Caddyfile   # put your domain in it first
+sudo systemctl enable --now evetour
+```
+
+Point the domain's A record at the server before starting Caddy — TLS will not
+be issued otherwise. Every later deploy is `git pull && bash deploy/deploy.sh`.
+
+**Backup `dev.db` and `uploads/`.** They are the only state that is not in git,
+and losing them loses all content edits and every uploaded image.
 
 ### Option A — one server, keep SQLite
 
